@@ -1,0 +1,44 @@
+{
+  "profiles": {
+    "AlunosAPI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:7223;http://localhost:5223",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Profile 1": {
+      "commandName": "IIS",
+      "workingDirectory": "C:\\Users\\Escolar Manager\\source\\repos\\isaacEstudos\\AlunosAPI\\bin\\Release\\net6.0\\publish",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost/alunosapi",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "https://localhost/alunosapi",
+      "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "http://localhost:49131",
+      "sslPort": 44373
+    }
+  }
+}

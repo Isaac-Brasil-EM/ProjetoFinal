@@ -1,0 +1,54 @@
+﻿@model MVCAlunos.Models.AlunoModel
+
+@{
+    ViewData["Title"] = "Editar Aluno";
+}
+
+<h1 style="margin-top: 60px">Editar @Html.DisplayFor(model => model.Nome)</h1>
+
+<hr style="margin-bottom: 30px" />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Matricula" />
+            <div class="form-group" style="margin-bottom: 15px">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px">
+                <label asp-for="Cpf" class="control-label"></label>
+                <input asp-for="Cpf" class="form-control" />
+                <span asp-validation-for="Cpf" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px">
+                <label asp-for="Nascimento" class="control-label"></label>
+                <input asp-for="Nascimento" class="form-control" />
+                <span asp-validation-for="Nascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="margin-bottom: 15px">
+                <label asp-for="Sexo" class="control-label"></label>
+                <input asp-for="Sexo" class="form-control" />
+                <span asp-validation-for="Sexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-success" style="width=22em; height=20px; margin-top: 20px"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-dark" style="padding: 5px 16px 5px 16px; margin-top: 20px">
+            Voltar
+        </button>
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
