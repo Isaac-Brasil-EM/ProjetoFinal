@@ -1,9 +1,5 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MVCAlunos.Data.Banco
 {
@@ -36,7 +32,7 @@ namespace MVCAlunos.Data.Banco
                 connection.Open();
                 bconexao = true;
             }
-            catch (Exception ex)
+            catch (Exception _)
             {
                 bconexao = false;
 
