@@ -74,6 +74,7 @@ namespace Repository
         /*  public Aluno GetByMatricula(int matricula)
           {
                return Get(aluno => aluno.Matricula == matricula).FirstOrDefault();
+        //testee
           }*/
 
         public IEnumerable<Aluno> GetByContendoNoNome(string parteDoNome)

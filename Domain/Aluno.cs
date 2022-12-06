@@ -10,7 +10,7 @@
 
         public override string ToString()
         {
-            string stringFormatted = "Matricula: " + Matricula + " Nome: " + Nome + " Cpf: "  + Cpf + " Nascimento: " + Nascimento + " Sexo: " + Sexo; 
+            string stringFormatted = "Matricula: " + Matricula + " | Nome: " + Nome + " | Cpf: "  + Cpf + " | Nascimento: " + Nascimento + " | Sexo: " + Sexo; 
             return stringFormatted;
         }
 
