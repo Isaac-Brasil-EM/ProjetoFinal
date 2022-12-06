@@ -112,6 +112,7 @@ namespace MVCAlunos.Controllers
             if (ra.GetByMatricula(alunoModel.Matricula) != null)
             {
                 ModelState.AddModelError("Matricula", "Esse aluno já foi cadastrado");
+
                 return View();
 
             }

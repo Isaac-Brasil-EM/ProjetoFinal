@@ -19,7 +19,8 @@ namespace MVCAlunos.Models
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O Campo CPF deve ter 11 dígitos. ")]
         public string Cpf { get; set; }
 
-
+        [Range(typeof(DateTime), "1/1/1000", "1/1/9999",
+        ErrorMessage = "{0} deve estar entre {1:d} e {2:d}")]
         [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
 
