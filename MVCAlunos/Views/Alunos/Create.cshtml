@@ -16,6 +16,7 @@
                 <label asp-for="Matricula" class="control-label"></label>
                 <input asp-for="Matricula" class="form-control" />
                 <span asp-validation-for="Matricula" class="text-danger"></span>
+
             </div>
             <div class="form-group" style="margin-bottom: 15px">
                 <label asp-for="Nome" class="control-label"></label>
@@ -41,40 +42,9 @@
                 <input type="submit" value="Create" class="btn btn-success" style="width=22em; height=20px; margin-top: 20px" />
             </div>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Modal
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Atenção</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Esse aluno já está cadastrado. Insira uma nova Matrícula
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </form>
     </div>
 </div>
-
-@*<script>
-
-    const myModal = document.getElementById('myModal')
-    const myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', () => {
-        myInput.focus()
-    })
-
-</script>*@
 
 <div>
     <a asp-action="Index">

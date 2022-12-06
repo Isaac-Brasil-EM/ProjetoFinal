@@ -9,7 +9,7 @@ namespace MVCAlunos.Models
     public class AlunoModel
     {
         [Key]
-        [Range(1, int.MaxValue, ErrorMessage = "Insira um valor positivo")]
+        [Range(0, int.MaxValue, ErrorMessage = "Insira um valor positivo")]
         public int Matricula { get; set; }
 
         [StringLength(60, MinimumLength = 3)]

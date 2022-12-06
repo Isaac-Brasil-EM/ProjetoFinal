@@ -65,6 +65,7 @@ namespace AlunosAPI.Controllers
             }
             else
             {
+                ModelState.AddModelError("", "Um erro ocorreu!");
 
             }
         }
