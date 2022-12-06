@@ -29,14 +29,12 @@ namespace MVCAlunos.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
 
         public IActionResult GetMatricula(string searchString)
         {
 
             RepositorioAluno ra = new();
-            List<AlunoModel> lista_alunos = new List<AlunoModel>();
-
 
             Aluno alunoEncontrado = ra.GetByMatricula(Convert.ToInt32(searchString));
             if (alunoEncontrado == null)
@@ -55,12 +53,41 @@ namespace MVCAlunos.Controllers
                     Nascimento = alunoEncontrado.Nascimento,
                     Sexo = (Models.EnumeradorSexo)alunoEncontrado.Sexo
                 };
-
-                lista_alunos.Add(aluno);
-
-                return RedirectToAction(nameof(Index), lista_alunos.FirstOrDefault());
+                return RedirectToAction(nameof(Index), aluno);
             }
         }
+
+
+        [HttpGet]
+
+        public IActionResult GetNome(string searchString)
+        {
+
+            RepositorioAluno ra = new();
+            IEnumerable<Aluno> alunoEncontrado = ra.GetByContendoNoNome(searchString);
+
+            if (alunoEncontrado == null)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+
+                /*   AlunoModel aluno = new AlunoModel
+                   {
+                       Matricula = alunoEncontrado.,
+                       Nome = alunoEncontrado.Nome,
+                       Cpf = alunoEncontrado.Cpf,
+                       Nascimento = alunoEncontrado.Nascimento,
+                       Sexo = (Models.EnumeradorSexo)alunoEncontrado.Sexo
+                   };*/
+                //return RedirectToAction(nameof(Index), aluno);
+                return RedirectToAction(nameof(Index));
+
+            }
+        }
+
         // GET: Alunos/Details/5
         public IActionResult Details(int? id)
         {

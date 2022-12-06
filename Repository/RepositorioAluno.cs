@@ -30,8 +30,58 @@ namespace Repository
 
         public Aluno GetByMatricula(int matricula)
         {
+            Aluno aluno = new();
+            string query = $"SELECT * FROM TBALUNO WHERE MATRICULA = {matricula}";
+            using (var con = new FbConnection(conn.ToString()))
+            {
+                con.Open();
+                using (var transaction = con.BeginTransaction())
+                {
+                    using (var command = new FbCommand(query, con, transaction))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                int codigo = reader.GetInt32(0);
+                                string nome = reader.GetString(1);
+                                string cpf = reader.GetString(2);
+                                EnumeradorSexo sexo = (EnumeradorSexo)reader.GetInt32(3);
+                                string nascimento = reader.GetInt32(4).ToString();
+
+                               aluno = new Aluno
+                                {
+                                    Matricula = codigo,
+                                    Nome = nome,
+                                    Cpf = cpf,
+                                    Sexo = sexo,
+                                    Nascimento = DateTime.ParseExact(nascimento,
+                                    "yyyyMMdd",
+                                    CultureInfo.InvariantCulture,
+                                    DateTimeStyles.None)
+                                };
+                            }
+                        }
+                    }
+                    transaction.Commit();
+                }
+            }
+            return aluno;
+        }
+
+        /*  public Aluno GetByMatricula(int matricula)
+          {
+               return Get(aluno => aluno.Matricula == matricula).FirstOrDefault();
+       
+          }*/
+
+        public IEnumerable<Aluno> GetByContendoNoNome(string parteDoNome)
+        {
+
+           // return Get(aluno => aluno.Nome.ToLower().Contains(parteDoNome)).ToList();
+
             List<Aluno> list = new();
-            string query = "SELECT * FROM TBALUNO WHERE MATRICULA LIKE'" + matricula + "'";
+            string query = "SELECT * FROM TBALUNO WHERE MATRICULA LIKE'" + parteDoNome + "'";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
@@ -66,19 +116,7 @@ namespace Repository
                     transaction.Commit();
                 }
             }
-            return list.FirstOrDefault();
-        }
-
-        /*  public Aluno GetByMatricula(int matricula)
-          {
-               return Get(aluno => aluno.Matricula == matricula).FirstOrDefault();
-        //testee
-          }*/
-
-        public IEnumerable<Aluno> GetByContendoNoNome(string parteDoNome)
-        {
-
-            return Get(aluno => aluno.Nome.ToLower().Contains(parteDoNome)).ToList();
+            return list;
 
         }
 
