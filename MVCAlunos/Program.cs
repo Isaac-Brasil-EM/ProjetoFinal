@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using MVCAlunos.Data;
-using MVCAlunos.Models;
-using System.Globalization;
+﻿using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 /*builder.Services.AddDbContext<MVCAlunosContext>(options =>

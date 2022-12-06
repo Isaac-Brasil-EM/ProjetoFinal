@@ -60,8 +60,6 @@ namespace AlunosAPI.Controllers
             if (ModelState.IsValid == true)
             {
                 RepositorioAluno ra = new();
-
-           
                 ra.Add(aluno);
 
             }

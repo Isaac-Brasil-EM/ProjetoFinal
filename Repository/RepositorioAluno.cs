@@ -1,11 +1,9 @@
 ﻿
 using Domain;
 using FirebirdSql.Data.FirebirdClient;
-using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq.Expressions;
-using System.Reflection.PortableExecutable;
 
 
 namespace Repository
