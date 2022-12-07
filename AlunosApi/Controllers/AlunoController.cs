@@ -60,13 +60,12 @@ namespace AlunosAPI.Controllers
             if (ModelState.IsValid == true)
             {
                 RepositorioAluno ra = new();
-
-           
                 ra.Add(aluno);
 
             }
             else
             {
+                ModelState.AddModelError("", "Um erro ocorreu!");
 
             }
         }

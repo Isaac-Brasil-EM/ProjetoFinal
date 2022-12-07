@@ -29,24 +29,20 @@ namespace MVCAlunos.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
 
         public IActionResult GetMatricula(string searchString)
         {
 
             RepositorioAluno ra = new();
-            List<AlunoModel> lista_alunos = new List<AlunoModel>();
-
 
             Aluno alunoEncontrado = ra.GetByMatricula(Convert.ToInt32(searchString));
             if (alunoEncontrado == null)
             {
-
                 return RedirectToAction(nameof(Index));
             }
             else
             {
-
                 AlunoModel aluno = new AlunoModel
                 {
                     Matricula = alunoEncontrado.Matricula,
@@ -55,12 +51,42 @@ namespace MVCAlunos.Controllers
                     Nascimento = alunoEncontrado.Nascimento,
                     Sexo = (Models.EnumeradorSexo)alunoEncontrado.Sexo
                 };
-
-                lista_alunos.Add(aluno);
-
-                return RedirectToAction(nameof(Index), lista_alunos.FirstOrDefault());
+                return RedirectToAction(nameof(Index), aluno);
             }
         }
+
+
+        [HttpGet]
+
+        public IActionResult GetNome(string searchString)
+        {
+
+            RepositorioAluno ra = new();
+            IEnumerable<Aluno> alunosEncontrados = ra.GetByContendoNoNome(searchString);
+
+            if (alunosEncontrados == null)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+
+
+                IEnumerable<AlunoModel> listaAlunoModel = alunosEncontrados.Select(o => new AlunoModel
+                {
+                    Matricula = o.Matricula,
+                    Nome = o.Nome,
+                    Cpf = o.Cpf,
+                    Nascimento = o.Nascimento,
+                    Sexo = (Models.EnumeradorSexo)o.Sexo
+                });
+
+                return RedirectToAction(nameof(Index), listaAlunoModel);
+
+            }
+        }
+
         // GET: Alunos/Details/5
         public IActionResult Details(int? id)
         {
@@ -111,8 +137,9 @@ namespace MVCAlunos.Controllers
 
             if (ra.GetByMatricula(alunoModel.Matricula) != null)
             {
+                ModelState.AddModelError("Matricula", "Esse aluno já foi cadastrado");
 
-                return RedirectToAction(nameof(Index));
+                return View();
 
             }
             else
