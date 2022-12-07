@@ -2,10 +2,10 @@
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Isaac-Brasil-EM/Escolar-manager?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/Isaac-Brasil-EM/Escolar-manager?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/Isaac-Brasil-EM/Escolar-manager?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/Isaac-Brasil-EM/Escolar-manager?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
 
 <img src="MVCAlunos/wwwroot/mvc1.png" alt="exemplo imagem">
 
