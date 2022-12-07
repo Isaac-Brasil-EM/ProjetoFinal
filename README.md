@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/Isaac-Brasil-EM/ProjetoFinal?style=for-the-badge)
 
-<img src="MVCAlunos/wwwroot/mvc1.png" alt="exemplo imagem">
+<img src="MVCAlunos/wwwroot/mvc3.png" alt="exemplo imagem">
 
 > CRUD Web de Alunos.
 
