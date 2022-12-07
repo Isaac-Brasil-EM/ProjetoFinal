@@ -27,4 +27,4 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
 
 Quer fazer parte desse projeto? Clique [AQUI](https://github.com/Isaac-Brasil-EM/Escolar-manager#-contribuindo-para-escolar-manager) e leia como contribuir.
 
-[⬆ Voltar ao topo](#mvc-alunos)<br>
+[⬆ Voltar ao topo](#projetofinal)<br>
