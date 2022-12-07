@@ -28,20 +28,21 @@ namespace Repository
 
         };
 
-        public Aluno GetByMatricula(int matricula)
+        public async Task<Aluno> GetByMatricula(int matricula)
         {
+            //return Get(aluno=> aluno.Matricula.ToString().Contains(matricula.ToString())).ToList();
             Aluno aluno = new();
             string query = $"SELECT * FROM TBALUNO WHERE MATRICULA = {matricula}";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
                     using (var command = new FbCommand(query, con, transaction))
                     {
-                        using (var reader = command.ExecuteReader())
+                        using (var reader = await command.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 int codigo = reader.GetInt32(0);
                                 string nome = reader.GetString(1);
@@ -69,29 +70,21 @@ namespace Repository
             return aluno;
         }
 
-        /*  public Aluno GetByMatricula(int matricula)
-          {
-               return Get(aluno => aluno.Matricula == matricula).FirstOrDefault();
-       
-          }*/
-
-        public IEnumerable<Aluno> GetByContendoNoNome(string parteDoNome)
+        public async Task<IEnumerable<Aluno>> GetByContendoNoNome(string parteDoNome)
         {
-
            // return Get(aluno => aluno.Nome.ToLower().Contains(parteDoNome)).ToList();
-
             List<Aluno> list = new();
-            string query = "SELECT * FROM TBALUNO WHERE MATRICULA LIKE'" + parteDoNome + "'";
+            string query = "SELECT * FROM TBALUNO WHERE NOME LIKE'" + parteDoNome + "'";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
                     using (var command = new FbCommand(query, con, transaction))
                     {
-                        using (var reader = command.ExecuteReader())
+                        using (var reader = await command.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 int codigo = reader.GetInt32(0);
                                 string nome = reader.GetString(1);
@@ -121,14 +114,14 @@ namespace Repository
         }
 
 
-        public override void Add(Aluno aluno)
+        public override async Task Add(Aluno aluno)
         {
             string query = "insert into TBALUNO values('" + aluno.Matricula + "','" + aluno.Nome.ToUpper() + "','" + aluno.Cpf + "'," + (int)aluno.Sexo + ",'" + aluno.Nascimento.ToString("yyyyMMdd") + "')";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
 
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
                     using (var command = new FbCommand(query, con, transaction))
                     {
@@ -144,14 +137,14 @@ namespace Repository
             }
         }
 
-        public override void Remove(Aluno aluno)
+        public override async Task Remove(Aluno aluno)
         {
             string query = "delete from TBALUNO where MATRICULA='" + aluno.Matricula + "'";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
 
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
                     using (var command = new FbCommand(query, con, transaction))
                     {
@@ -166,13 +159,13 @@ namespace Repository
             }
         }
 
-        public override void Update(Aluno aluno)
+        public override async Task Update(Aluno aluno)
         {
             string query = "update TBALUNO set Nome= '" + aluno.Nome.ToUpper() + "', Matricula='" + aluno.Matricula + "', Cpf='" + aluno.Cpf + "', Nascimento ='" + aluno.Nascimento.ToString("yyyyMMdd") + "', Sexo ='" + (int)aluno.Sexo + "' where Matricula ='" + aluno.Matricula + "' ";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
 
                     using (var command = new FbCommand(query, con, transaction))
@@ -189,23 +182,23 @@ namespace Repository
             }
         }
 
-        public override IEnumerable<Aluno> GetAll()
+        public override async Task<IEnumerable<Aluno>> GetAll()
         {
             List<Aluno> list = new();
             string query = "Select * from TBALUNO ";
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
-                using (var transaction = con.BeginTransaction())
+                using (var transaction = await con.BeginTransactionAsync())
                 {
 
                     using (var command = new FbCommand(query, con, transaction))
                     {
                         command.Connection = con;
 
-                        using (var reader = command.ExecuteReader())
+                        using (var reader = await command.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 int codigo = reader.GetInt32(0);
                                 string nome = reader.GetString(1);
@@ -232,9 +225,9 @@ namespace Repository
             return list;
         }
 
-        public override IEnumerable<Aluno> Get(Expression<Func<Aluno, bool>> predicate)
+        public override async Task<IEnumerable<Aluno>> Get(Expression<Func<Aluno, bool>> predicate)
         {
-            return GetAll().Where(predicate.Compile());
+            return (await GetAll()).Where(predicate.Compile());
         }
     }
 }

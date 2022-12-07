@@ -12,13 +12,13 @@ namespace AlunosAPI.Controllers
     {
         [HttpGet]
 
-        public IEnumerable<Aluno> GetAlunos()
+        public async Task<IEnumerable<Aluno>> GetAlunos()
         {
 
             RepositorioAluno ra = new();
 
             IEnumerable<Aluno> lista_alunos = new List<Aluno>();
-            lista_alunos = ra.GetAll();
+            lista_alunos = await ra.GetAll();
 
             IEnumerable<AlunoModel> listaAlunoModel = lista_alunos.Select(o => new AlunoModel
             {
@@ -34,13 +34,13 @@ namespace AlunosAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Aluno> GetAlunos(int id)
+        public async Task<ActionResult<Aluno>> GetAlunos(int id)
         {
             RepositorioAluno ra = new();
 
             IEnumerable<Aluno> lista_alunos = new List<Aluno>();
 
-            lista_alunos = ra.Get(m => m.Matricula == id);
+            lista_alunos = await ra.Get(m => m.Matricula == id);
 
             IEnumerable<AlunoModel> listaAlunoModel = lista_alunos.Select(o => new AlunoModel
             {
@@ -54,13 +54,13 @@ namespace AlunosAPI.Controllers
         }
 
         [HttpPost]
-        public void PostAlunos([FromBody] Aluno aluno)
+        public async Task PostAlunos([FromBody] Aluno aluno)
         {
 
             if (ModelState.IsValid == true)
             {
                 RepositorioAluno ra = new();
-                ra.Add(aluno);
+                await ra.Add(aluno);
 
             }
             else
@@ -71,25 +71,25 @@ namespace AlunosAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(Aluno aluno)
+        public async Task Delete(Aluno aluno)
         {
 
             if (ModelState.IsValid == true)
             {
                 RepositorioAluno ra = new RepositorioAluno();
-                ra.Remove(aluno);
+                await ra.Remove(aluno);
             }
 
         }
 
         [HttpPut("{id}")]
 
-        public void PutAlunos(int id, [FromBody] Aluno aluno)
+        public async Task PutAlunos(int id, [FromBody] Aluno aluno)
         {
             if (ModelState.IsValid == true)
             {
                 RepositorioAluno ra = new RepositorioAluno();
-                ra.Update(aluno);
+                await ra.Update(aluno);
 
             }
 

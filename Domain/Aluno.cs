@@ -8,12 +8,12 @@
         public DateTime Nascimento { get; set; }
         public EnumeradorSexo Sexo { get; set; }
 
-        public override string ToString()
+       /* public override string ToString()
         {
             string stringFormatted = "Matricula: " + Matricula + " | Nome: " + Nome + " | Cpf: "  + Cpf + " | Nascimento: " + Nascimento + " | Sexo: " + Sexo; 
             return stringFormatted;
         }
-
+*/
         public override bool Equals(object obj)
         {
             Aluno item = obj as Aluno;
