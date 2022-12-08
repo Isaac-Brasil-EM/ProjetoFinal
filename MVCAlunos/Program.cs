@@ -1,9 +1,7 @@
 ﻿using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
-/*builder.Services.AddDbContext<MVCAlunosContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MVCAlunosContext") ?? throw new InvalidOperationException("Connection string 'MVCAlunosContext' not found.")));
-*/
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();

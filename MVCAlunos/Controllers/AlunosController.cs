@@ -36,43 +36,10 @@ namespace MVCAlunos.Controllers
                 Sexo = (Models.EnumeradorSexo)o.Sexo
             });
 
-            //return Index("/CadastroAluno/Index.cshtml", listaAlunoModel.ToList());
             return View(listaAlunoModel.ToList());
 
-            //return View(listaAlunoModel);
         }
-      /*  public async Task<IActionResult> Index(int searchString)
-        {
-            RepositorioAluno ra = new();
-
-            IEnumerable<Aluno> lista_alunos = new List<Aluno>();
-            lista_alunos = await ra.GetAll();
-
-
-            var alunosFiltrados = from a in lista_alunos
-                                  select a;
-
-            if (searchString != null)
-            {
-                var x = searchString.GetType();
-                Console.WriteLine(x);
-                alunosFiltrados = alunosFiltrados.Where(s => s.Matricula!.Equals(searchString));
-
-            }
-
-            IEnumerable<AlunoModel> listaAlunoModel = alunosFiltrados.Select(o => new AlunoModel
-            {
-                Matricula = o.Matricula,
-                Nome = o.Nome,
-                Cpf = o.Cpf,
-                Nascimento = o.Nascimento,
-                Sexo = (Models.EnumeradorSexo)o.Sexo
-            });
-            return View(listaAlunoModel.ToList());
-
-            //return View(listaAlunoModel);
-        }*/
-
+     
         [HttpGet]
 
         public async Task<IActionResult> GetMatricula(string searchString)
@@ -184,8 +151,8 @@ namespace MVCAlunos.Controllers
                 Nascimento = alunoModel.Nascimento,
                 Sexo = (Domain.EnumeradorSexo)alunoModel.Sexo
             };
-            var alunoExiste = await ra.GetByMatricula(alunoModel.Matricula); 
-            if (alunoExiste.Cpf == null) // se o retorno de aluno for um padrão, onde o cpf é nulo é pq não existe nenhum aluno com essa matricula
+            Aluno alunoExiste = await ra.GetByMatricula(alunoModel.Matricula); 
+            if (alunoExiste.GetHashCode() == 0) // se o retorno de aluno for um padrão, onde a matricula é nula é pq não existe nenhum aluno com essa matricula
             {
                 await ra.Add(aluno);
                 return RedirectToAction(nameof(Index));
