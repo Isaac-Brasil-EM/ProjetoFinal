@@ -22,8 +22,7 @@ namespace MVCAlunos.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                alunosFiltrados = alunosFiltrados.Where(s => s.Nome!.Contains(searchString.ToUpper()));
-                //alunosFiltrados = alunosFiltrados.Where(s => s.Matricula!.Equals(searchString));
+                alunosFiltrados = alunosFiltrados.Where(s => s.Nome!.Contains(searchString.ToUpper()) || s.Matricula.ToString()!.Equals(searchString));
 
             }
 
