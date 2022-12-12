@@ -211,7 +211,7 @@ namespace Repository
                                 {
                                     Matricula = codigo,
                                     Nome = nome,
-                                    Cpf = cpf,
+                                    Cpf = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00"),
                                     Sexo = sexo,
                                     Nascimento = DateTime.ParseExact(nascimento,
                                     "yyyyMMdd",
