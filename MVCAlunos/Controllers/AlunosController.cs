@@ -14,11 +14,13 @@ namespace MVCAlunos.Controllers
             RepositorioAluno ra = new();
 
             IEnumerable<Aluno> lista_alunos = new List<Aluno>();
+            List<Aluno> lista_alunos_new = new List<Aluno>();
+
             lista_alunos = await ra.GetAll();
 
 
             var alunosFiltrados = from a in lista_alunos
-                         select a;
+                                  select a;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -26,6 +28,11 @@ namespace MVCAlunos.Controllers
 
             }
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var sla = await ra.GetByContendoNoNome(searchString);
+
+            }
 
             IEnumerable<AlunoModel> listaAlunoModel = alunosFiltrados.Select(o => new AlunoModel
             {
@@ -39,7 +46,7 @@ namespace MVCAlunos.Controllers
             return View(listaAlunoModel.ToList());
 
         }
-     
+
         [HttpGet]
 
         public async Task<IActionResult> GetMatricula(string searchString)
@@ -151,7 +158,7 @@ namespace MVCAlunos.Controllers
                 Nascimento = alunoModel.Nascimento,
                 Sexo = (Domain.EnumeradorSexo)alunoModel.Sexo
             };
-            Aluno alunoExiste = await ra.GetByMatricula(alunoModel.Matricula); 
+            Aluno alunoExiste = await ra.GetByMatricula(alunoModel.Matricula);
             if (alunoExiste.GetHashCode() == 0) // se o retorno de aluno for um padrão, onde a matricula é nula é pq não existe nenhum aluno com essa matricula
             {
                 await ra.Add(aluno);

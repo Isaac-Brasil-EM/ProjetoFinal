@@ -74,7 +74,8 @@ namespace Repository
         {
            // return Get(aluno => aluno.Nome.ToLower().Contains(parteDoNome)).ToList();
             List<Aluno> list = new();
-            string query = "SELECT * FROM TBALUNO WHERE NOME LIKE'" + parteDoNome + "'";
+            string query = $"SELECT * FROM TBALUNO WHERE NOME LIKE '%{parteDoNome}%'";
+
             using (var con = new FbConnection(conn.ToString()))
             {
                 con.Open();
