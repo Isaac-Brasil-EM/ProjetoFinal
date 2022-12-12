@@ -12,25 +12,23 @@ namespace MVCAlunos.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             RepositorioAluno ra = new();
+            RepositorioAbstrato<Aluno> rb = ra; // upcast
 
             IEnumerable<Aluno> lista_alunos = new List<Aluno>();
             List<Aluno> lista_alunos_new = new List<Aluno>();
 
-            lista_alunos = await ra.GetAll();
+            lista_alunos = await rb.GetAll(); //utilizando a classe pai ao invés da especializada
 
 
             var alunosFiltrados = from a in lista_alunos
                                   select a;
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                alunosFiltrados = alunosFiltrados.Where(s => s.Nome!.Contains(searchString.ToUpper()) || s.Matricula.ToString()!.Equals(searchString));
-
-            }
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                var sla = await ra.GetByContendoNoNome(searchString);
+                //alunosFiltrados = await ra.GetByContendoNoNome(searchString.ToUpper()); //filtra por parte do nome 
+
+                alunosFiltrados = alunosFiltrados.Where(s => s.Nome!.Contains(searchString.ToUpper()) || s.Matricula.ToString()!.Equals(searchString)); //filtra por parte do nome OU matricula
 
             }
 
@@ -42,6 +40,7 @@ namespace MVCAlunos.Controllers
                 Nascimento = o.Nascimento,
                 Sexo = (Models.EnumeradorSexo)o.Sexo
             });
+
 
             return View(listaAlunoModel.ToList());
 
